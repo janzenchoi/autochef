@@ -1,0 +1,7 @@
+﻿actionProcess,actionResult,price,quality
+assemble,assembled,0,0
+bake,baked,8,4
+boil,boiled,4,1
+chop,chopped,1,1
+fry,fried,2,4
+grill,grilled,4,6
