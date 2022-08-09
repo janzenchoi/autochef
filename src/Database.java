@@ -22,19 +22,12 @@ public class Database {
 
         // Prepare CSV reading
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.INGREDIENTS_DATA_PATH));
-        String line;
-        Boolean skipHeader = true;
+        String line = bufferedReader.readLine();
 
         // Read row by row
         while ((line = bufferedReader.readLine()) != null) {
 
-            // Skip header (name | price | quality)
-            if (skipHeader) {
-                skipHeader = false;
-                continue;
-            }
-
-            // Extract column information
+            // Extract column information (name | price | quality)
             String[] columns = line.split(",");
             String name = columns[0];
             int price   = Integer.parseInt(columns[1]);
@@ -52,19 +45,12 @@ public class Database {
 
         // Prepare CSV reading
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.ACTIONS_DATA_PATH));
-        String line;
-        Boolean skipHeader = true;
+        String line = bufferedReader.readLine();
 
         // Read row by row
         while ((line = bufferedReader.readLine()) != null) {
 
-            // Skip header (actionProcess | actionResult | price | quality)
-            if (skipHeader) {
-                skipHeader = false;
-                continue;
-            }
-
-            // Extract column information
+            // Extract column information (actionProcess | actionResult | price | quality)
             String[] columns = line.split(",");
             String actionProcess    = columns[0];
             String actionResult     = columns[1];
