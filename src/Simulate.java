@@ -8,7 +8,7 @@ public class Simulate {
     // Main function
     public static void main(String args[]) {
         Instructor instructor = new Instructor();
-        String instructionsString = instructor.getInstructionsString("pizza");
+        String instructionsString = instructor.getInstructionsString("burger_beef");
         System.out.println(instructionsString);
     }
 }

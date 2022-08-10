@@ -28,18 +28,19 @@ public class Instructor {
         
         // If multiple subingredients, assemble
         if (ingredient.getIngredients().size() > 0) {
-            ArrayList<String> ingredientNames = new ArrayList<String>();
-            for (Ingredient subIngredient : ingredient.getIngredients()) {
-                ingredientNames.add(subIngredient.getName());
+            for (Action action : ingredient.getActions()) {
+                Instruction instruction = new Instruction(action.getName());
+                for (Ingredient subIngredient : ingredient.getIngredients()) {
+                    instruction.addSubject(subIngredient.getName());
+                }
+                instructions.add(instruction);
             }
-            instructions.add(new Instruction(Constants.ASSEMBLE_ACTION, ingredientNames));
         
         // Add own actions
         } else {
             for (Action action : ingredient.getActions()) {
-                ArrayList<String> ingredientNames = new ArrayList<String>();
-                ingredientNames.add(ingredient.getName());
-                Instruction instruction = new Instruction(action.getName(), ingredientNames);
+                Instruction instruction = new Instruction(action.getName());
+                instruction.addSubject(ingredient.getName());
                 instructions.add(instruction);
             }
         }

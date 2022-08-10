@@ -77,9 +77,12 @@ public class FactoryIngredient {
 
         // Read row by row (name | actions | ingredient_1 | actions_1 | ... | ingredient_N | actions_N)
         while ((line = bufferedReader.readLine()) != null) {
+            String[] columns = line.split(",");
+            if (columns.length == 0) {
+                continue;
+            }
             
             // Extract basic information
-            String[] columns = line.split(",");
             String name = columns[0];
             int price = Integer.parseInt(columns[1]);
             int quality = Integer.parseInt(columns[2]);

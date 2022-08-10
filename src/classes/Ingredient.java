@@ -72,9 +72,9 @@ public class Ingredient {
         String actionString = General.arrayToString(this.actions);
         String ingredientsString = General.arrayToString(this.ingredients);
         return "{" +
-            "name: " + name + ", " +
-            "price: " + price + ", " +
-            "quality: " + quality + ", " +
+            "name: " + this.name + ", " +
+            "price: " + this.price + ", " +
+            "quality: " + this.quality + ", " +
             "actions: " + actionString + ", " +
             "ingredients: " + ingredientsString +
         "}";

@@ -10,21 +10,26 @@ public class Instruction {
     public ArrayList<String> subjects;
 
     // Constructor
-    public Instruction(String action, ArrayList<String> subjects) {
+    public Instruction(String action) {
         this.action = action;
-        this.subjects = subjects;
+        this.subjects = new ArrayList<String>();
     }
 
     // Member getters
     public String getAction() { return this.action; }
     public ArrayList<String> getSubjects() { return this.subjects; }
 
+    // Adds a subject
+    public void addSubject(String subject) {
+        this.subjects.add(subject);
+    }
+
     // To String
     public String toString() {
         String subjectString = General.arrayToString(this.subjects);
         return "{" +
             "action: " + this.action + ", " +
-            "subject: " + subjectString +
+            "subjects: " + subjectString +
         "}";
     }
 }

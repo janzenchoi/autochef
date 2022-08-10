@@ -31,9 +31,9 @@ public class Action {
     @Override
     public String toString() {
         return "{" +
-            "name: " + name + ", " +
-            "price: " + price + ", " +
-            "quality: " + quality +
+            "name: " + this.name + ", " +
+            "price: " + this.price + ", " +
+            "quality: " + this.quality +
         "}";
     }
 }

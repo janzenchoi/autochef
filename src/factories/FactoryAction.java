@@ -30,9 +30,16 @@ public class FactoryAction {
         // Read row by row (name | price | quality)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns = line.split(",");
+            if (columns.length == 0) {
+                continue;
+            }
+            
+            // Extract information
             String name = columns[0];
             int price = Integer.parseInt(columns[1]);
             int quality = Integer.parseInt(columns[2]);
+            
+            // Create action
             Action action = new Action(name, price, quality);
             this.actionMap.put(name, action);
         }

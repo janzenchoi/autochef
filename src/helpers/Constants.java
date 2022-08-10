@@ -10,5 +10,7 @@ public class Constants {
     
     // Values
     public static final String NONE_ACTION = "none";
+    public static final String GET_ACTION = "get";
     public static final String ASSEMBLE_ACTION = "assemble";
+    public static final String SERVE_ACTION = "serve";
 }
