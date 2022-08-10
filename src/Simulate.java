@@ -1,4 +1,4 @@
-import factories.Factory;
+import classes.instructions.Instructor;
 
 /**
  * For simulating the natural process of everything
@@ -7,7 +7,8 @@ public class Simulate {
 
     // Main function
     public static void main(String args[]) {
-        Factory factory = Factory.getFactory();
-        System.out.println(factory.getRecipe("salad").toString());
+        Instructor instructor = new Instructor();
+        String instructionsString = instructor.getInstructionsString("pizza");
+        System.out.println(instructionsString);
     }
 }

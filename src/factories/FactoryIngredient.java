@@ -1,57 +1,116 @@
 package factories;
+import java.util.ArrayList;
 import java.util.HashMap;
-import classes.Ingredient;
-import helpers.Constants;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import classes.Action;
+import classes.Ingredient;
+import helpers.Constants;
 
 /**
- * Provides ingredient objects
+ * Provides recipe objects
  */
 public class FactoryIngredient {
+    private FactoryAction factoryAction;
     private HashMap<String, Ingredient> ingredientMap;
-    
-    // Singleton Constructor
-    public FactoryIngredient() {
+
+    // Constructor
+    public FactoryIngredient(FactoryAction factoryAction) {
+        this.factoryAction = factoryAction;
         try {
-            this.ingredientMap = getIngredients();
+            this.ingredientMap = new HashMap<String, Ingredient>();
+            setIngredients();
         } catch (IOException e) {}
     }
 
-    // Get all the ingredients
-    private HashMap<String, Ingredient> getIngredients() throws IOException {
+    // Adds a raw ingredient to the recipe map
+    private void setIngredient(String name, int price, int quality, String[] actions) {
+        Ingredient ingredient = new Ingredient(name, price, quality);
+        for (int i = 0; i < actions.length; i++) {
+            if (!actions[i].equals(Constants.NONE_ACTION)) {
+                Action action = this.factoryAction.getAction(actions[i]);
+                ingredient.addAction(action);
+            }
+        }
+        this.ingredientMap.put(name, ingredient);
+    }
+
+    // Adds an ingredient assembly to the recipe map
+    private void setIngredient(String name, String[] actions, ArrayList<String> componentNames, ArrayList<String[]> componentActions) {
+        
+        // Create base ingredient
+        Ingredient ingredient = new Ingredient(name, 0, 0);
+        for (int i = 0; i < actions.length; i++) {
+            Action clone = this.factoryAction.getNewAction(actions[i]);
+            ingredient.addAction(clone);
+        }
+
+        // Add sub ingredients
+        for (int i = 0; i < componentNames.size(); i++) {
+
+            // Get ingredient
+            Ingredient newIngredient = this.ingredientMap.get(componentNames.get(i));
+            Ingredient clone = new Ingredient(newIngredient);
+            
+            // Add new actions
+            for (int j = 0; j < componentActions.get(i).length; j++) {
+                String actionName = componentActions.get(i)[j];
+                if (!actionName.equals(Constants.NONE_ACTION)) {
+                    Action action = this.factoryAction.getNewAction(actionName);
+                    clone.addAction(action);
+                }
+            }
+
+            // Add component ingredient
+            ingredient.addIngredient(clone);
+        }
+        this.ingredientMap.put(name, ingredient);
+    }
+
+    // Get the recipes
+    public void setIngredients() throws IOException {
 
         // Initialisation
-        HashMap<String, Ingredient> ingredientMap = new HashMap<String, Ingredient>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.INGREDIENTS_DATA_PATH));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.INGREDIENT_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (name | price | quality)
+        // Read row by row (name | actions | ingredient_1 | actions_1 | ... | ingredient_N | actions_N)
         while ((line = bufferedReader.readLine()) != null) {
+            
+            // Extract basic information
             String[] columns = line.split(",");
             String name = columns[0];
             int price = Integer.parseInt(columns[1]);
             int quality = Integer.parseInt(columns[2]);
-            Ingredient ingredient = new Ingredient(name, price, quality);
-            ingredientMap.put(name, ingredient);
+            String[] actions = columns[3].split("&");
+            int numComponents = (columns.length - 4) / 2;
+
+            // Add recipe based on number of ingredients
+            if (numComponents == 0) {
+                setIngredient(name, price, quality, actions);
+            } else {
+                ArrayList<String> componentNames = new ArrayList<String>();
+                ArrayList<String[]> componentActions = new ArrayList<String[]>();
+                for (int i = 4; i < columns.length; i += 2) {
+                    componentNames.add(columns[i]);
+                    componentActions.add(columns[i + 1].split("&"));
+                }
+                setIngredient(name, actions, componentNames, componentActions);
+            }
         }
 
-        // Close buffer and return
+        // Close and return
         bufferedReader.close();
-        return ingredientMap;
     }
 
     // Gets an ingredient
     public Ingredient getIngredient(String name) {
-        return ingredientMap.get(name);
+        return this.ingredientMap.get(name);
     }
 
-    // Gets a new ingredient
+    // Gets a copy of the ingredient
     public Ingredient getNewIngredient(String name) {
-        Ingredient ingredient = ingredientMap.get(name);
-        int price = ingredient.getPrice();
-        int quality = ingredient.getQuality();
-        return new Ingredient(name, price, quality);
+        return new Ingredient(getIngredient(name));
     }
 }

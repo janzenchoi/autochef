@@ -15,16 +15,16 @@ public class FactoryAction {
     // Singleton Constructor
     public FactoryAction() {
         try {
-            this.actionMap = getActions();
+            this.actionMap = new HashMap<String, Action>();
+            setActions();
         } catch (IOException e) {}
     }
 
     // Get all the Actions
-    private HashMap<String, Action> getActions() throws IOException {
+    private void setActions() throws IOException {
 
         // Initialisation
-        HashMap<String, Action> actionMap = new HashMap<String, Action>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.ACTIONS_DATA_PATH));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.ACTION_DATA_PATH));
         String line = bufferedReader.readLine();
 
         // Read row by row (name | price | quality)
@@ -34,24 +34,20 @@ public class FactoryAction {
             int price = Integer.parseInt(columns[1]);
             int quality = Integer.parseInt(columns[2]);
             Action action = new Action(name, price, quality);
-            actionMap.put(name, action);
+            this.actionMap.put(name, action);
         }
 
-        // Close buffer and return
+        // Close buffer
         bufferedReader.close();
-        return actionMap;
     }
 
     // Gets an action
     public Action getAction(String name) {
-        return actionMap.get(name);
+        return this.actionMap.get(name);
     }
 
     // Gets a new action
     public Action getNewAction(String name) {
-        Action action = actionMap.get(name);
-        int price = action.getPrice();
-        int quality = action.getQuality();
-        return new Action(name, price, quality);
+        return new Action(getAction(name));
     }
 }

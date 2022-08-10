@@ -15,17 +15,20 @@ public class Action {
         this.quality = quality;
     }
 
+    // Clone constructor
+    public Action(Action clone) {
+        this.name = clone.getName();
+        this.price = clone.getPrice();
+        this.quality = clone.getQuality();
+    }
+
     // Member Getters
     public String getName() { return this.name; }
     public int getPrice() { return this.price; }
     public int getQuality() { return this.quality; }
 
-    // Execute the action
-    public void act(Ingredient ingredient) {
-        ingredient.addAction(this);
-    }
-
     // To String
+    @Override
     public String toString() {
         return "{" +
             "name: " + name + ", " +
