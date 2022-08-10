@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import classes.Action;
 import classes.Ingredient;
 import factories.Factory;
-import helpers.Constants;
 
 /**
  * Instructs the system to do things
@@ -48,15 +47,16 @@ public class Instructor {
     }
 
     // Returns a list of instructions to create an ingredient
-    public ArrayList<Instruction> getInstructions(String ingredientName) {
+    public ArrayList<Instruction> getInstructions(String ingredientAlias) {
+        String ingredientName = this.factory.getIngredientName(ingredientAlias);
         Ingredient ingredient = this.factory.getIngredient(ingredientName);
         ArrayList<Instruction> instructions = getInstructions(ingredient);
         return instructions;
     }
 
     // Gets a string of the instructions
-    public String getInstructionsString(String ingredientName) {
-        ArrayList<Instruction> instructions = getInstructions(ingredientName);
+    public String getInstructionsString(String ingredientAlias) {
+        ArrayList<Instruction> instructions = getInstructions(ingredientAlias);
         String instructionsString = "";
         for (Instruction instruction : instructions) {
             instructionsString += instruction.toString() + "\n";
