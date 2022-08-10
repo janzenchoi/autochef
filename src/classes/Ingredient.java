@@ -1,5 +1,6 @@
 package classes;
 import java.util.ArrayList;
+import helpers.General;
 
 /**
  * Ingredient Class
@@ -27,5 +28,16 @@ public class Ingredient {
     // Adds to the list of actions
     public void addAction(Action action) {
         this.actions.add(action);
+    }
+
+    // To String
+    public String toString() {
+        String actionsString = General.arrayToString(this.actions);
+        return "{" +
+            "name: " + name + ", " +
+            "price: " + price + ", " +
+            "quality: " + quality + ", " +
+            "actions: " + actionsString +
+        "}";
     }
 }

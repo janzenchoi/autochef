@@ -8,7 +8,7 @@ public class General {
     private General() {}
 
     // Converts a list of strings into a single, oxfard-comma separated string
-    public String conjunct(ArrayList<String> stringList, String conjunction) {
+    public static String conjunct(ArrayList<String> stringList, String conjunction) {
         
         // Deal with edge cases (numStrins == 1 or 2)
         if (stringList.size() == 1) {
@@ -24,5 +24,18 @@ public class General {
         }
         conjunctedString += conjunction + " " + stringList.get(stringList.size() - 1);
         return conjunctedString;
+    }
+
+    // Converts an ArrayList to a string
+    public static <T> String arrayToString(ArrayList<T> list) {
+        String listString = "[";
+        for (int i = 0; i < list.size(); i++) {
+            T t = list.get(i);
+            listString += t.toString();
+            if (i < list.size() - 1) {
+                listString += ", ";
+            }
+        }
+        return listString + "]";
     }
 }
