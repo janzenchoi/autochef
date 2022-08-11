@@ -1,11 +1,11 @@
 ﻿name,price,quality
 ,,
-assemble,0,0
-bake,3,2
-boil,3,1
-chop,1,1
+assemble,0,1
+bake,2,2
+blend,1,2
+boil,2,1
+chop,0,1
 fry,3,5
 get,0,0
 grill,3,4
-serve,0,0
-stir,2,2
+serve,0,1

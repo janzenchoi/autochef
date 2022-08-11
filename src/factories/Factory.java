@@ -20,7 +20,7 @@ public class Factory {
     private Factory() {
         this.factoryAction = new FactoryAction();
         this.factoryIngredient = new FactoryIngredient(this.factoryAction);
-        this.factoryOrder = new FactoryOrder(this.factoryIngredient);
+        this.factoryOrder = new FactoryOrder(this.factoryAction, this.factoryIngredient);
     }
 
     // Passes function call to appropriate factory
