@@ -5,33 +5,23 @@ package classes;
  */
 public class Action {
     private String name;
-    private int price;
-    private int quality;
 
     // Constructor
-    public Action(String name, int price, int quality) {
+    public Action(String name) {
         this.name = name;
-        this.price = price;
-        this.quality = quality;
     }
 
     // Clone constructor
     public Action(Action clone) {
         this.name = clone.getName();
-        this.price = clone.getPrice();
-        this.quality = clone.getQuality();
     }
 
     // Member Getters
     public String getName() { return this.name; }
-    public int getPrice() { return this.price; }
-    public int getQuality() { return this.quality; }
 
     // Is Equal
     public Boolean isEqual(Action toCheck) {
-        if (!this.name.equals(toCheck.getName())
-        || this.price != toCheck.getPrice()
-        || this.quality != toCheck.getQuality()) {
+        if (!this.name.equals(toCheck.getName())) {
             return false;
         }
         return true;
@@ -41,9 +31,7 @@ public class Action {
     @Override
     public String toString() {
         return "{" +
-            "name: " + this.name + ", " +
-            "price: " + this.price + ", " +
-            "quality: " + this.quality +
+            "name: " + this.name +
         "}";
     }
 }

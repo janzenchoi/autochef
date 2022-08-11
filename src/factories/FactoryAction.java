@@ -20,27 +20,18 @@ public class FactoryAction {
         } catch (IOException e) {}
     }
 
-    // Get all the Actions
+    // Set all the Actions
     private void setActions() throws IOException {
 
         // Initialisation
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.ACTION_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (name | price | quality)
+        // Read row by row (| name |)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns = line.split(",");
-            if (columns.length == 0) {
-                continue;
-            }
-            
-            // Extract information
             String name = columns[0];
-            int price = Integer.parseInt(columns[1]);
-            int quality = Integer.parseInt(columns[2]);
-            
-            // Create action
-            Action action = new Action(name, price, quality);
+            Action action = new Action(name);
             this.actionMap.put(name, action);
         }
 
@@ -51,10 +42,5 @@ public class FactoryAction {
     // Gets an action
     public Action getAction(String name) {
         return this.actionMap.get(name);
-    }
-
-    // Gets a new action
-    public Action getNewAction(String name) {
-        return new Action(getAction(name));
     }
 }

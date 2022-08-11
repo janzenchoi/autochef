@@ -1,0 +1,8 @@
+﻿name,ingredient_1,actions_1,ingredient_2,actions_2,ingredient_3,actions_3,ingredient_4,actions_4,ingredient_5,actions_5,ingredient_6,actions_6,ingredient_7,actions_7,ingredient_8,actions_8,ingredient_9,actions_9,ingredient_10,actions_10
+bread,dough,bake,,,,,,,,,,,,,,,,,,
+burger_beef,bread,chop,beef,chop&grill,cheese,chop,,,,,,,,,,,,,,
+burger_chicken,bread,chop,chicken,fry,lettuce,chop,,,,,,,,,,,,,,
+dough,flour,none,water,none,,,,,,,,,,,,,,,,
+pizza,pizza_raw,bake,,,,,,,,,,,,,,,,,,
+pizza_raw,cheese,chop,tomato,chop&blend,dough,none,,,,,,,,,,,,,,
+salad,lettuce,chop,tomato,chop,,,,,,,,,,,,,,,,
