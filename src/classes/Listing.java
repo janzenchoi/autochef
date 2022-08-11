@@ -11,10 +11,10 @@ public class Listing {
 
     // Constructor
     public Listing(String alias, Ingredient ingredient, int price, int quality) {
-        this.alias = alias;
+        this.alias      = alias;
         this.ingredient = ingredient;
-        this.price = price;
-        this.quality = quality;
+        this.price      = price;
+        this.quality    = quality;
     }
 
     // Clone Constructor

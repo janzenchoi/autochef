@@ -32,11 +32,11 @@ public class FactoryListing {
 
         // Read row by row (| alias | ingredientName | price | quality |)
         while ((line = bufferedReader.readLine()) != null) {
-            String[] columns = line.split(",");
-            String alias = columns[0];
-            String ingredientName = columns[1];
-            int price = Integer.parseInt(columns[2]);
-            int quality = Integer.parseInt(columns[3]);
+            String[] columns        = line.split(",");
+            String alias            = columns[0];
+            String ingredientName   = columns[1];
+            int price               = Integer.parseInt(columns[2]);
+            int quality             = Integer.parseInt(columns[3]);
             
             // Create ingredient
             Ingredient ingredient = this.factoryIngredient.getIngredient(ingredientName);

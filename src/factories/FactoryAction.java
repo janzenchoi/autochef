@@ -29,9 +29,9 @@ public class FactoryAction {
 
         // Read row by row (| name |)
         while ((line = bufferedReader.readLine()) != null) {
-            String[] columns = line.split(",");
-            String name = columns[0];
-            Action action = new Action(name);
+            String[] columns    = line.split(",");
+            String name         = columns[0];
+            Action action       = new Action(name);
             this.actionMap.put(name, action);
         }
 

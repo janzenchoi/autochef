@@ -20,10 +20,10 @@ public class Factory {
 
     // Single Constructor
     private Factory() {
-        this.factoryAction = new FactoryAction();
-        this.factoryIngredient = new FactoryIngredient();
-        this.factoryRecipe = new FactoryRecipe(factoryAction, factoryIngredient);
-        this.factoryListing = new FactoryListing(factoryIngredient);
+        this.factoryAction      = new FactoryAction();
+        this.factoryIngredient  = new FactoryIngredient();
+        this.factoryRecipe      = new FactoryRecipe(factoryAction, factoryIngredient);
+        this.factoryListing     = new FactoryListing(factoryIngredient);
     }
 
     // Passes function call to appropriate factory

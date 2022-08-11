@@ -50,8 +50,10 @@ public class FactoryRecipe {
 
                 // Add actions to input ingredient
                 for (int j = 0; j < inputActions.length; j++) {
-                    Action action = this.factoryAction.getAction(inputActions[j]);
-                    inputIngredient.addAction(action);
+                    if (!inputActions[j].equals(Constants.NONE_ACTION)) {
+                        Action action = this.factoryAction.getAction(inputActions[j]);
+                        inputIngredient.addAction(action);
+                    }
                 }
 
                 // Add to list

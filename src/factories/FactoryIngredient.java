@@ -29,9 +29,9 @@ public class FactoryIngredient {
 
         // Read row by row (| name |)
         while ((line = bufferedReader.readLine()) != null) {
-            String[] columns = line.split(",");
-            String name = columns[0];
-            Ingredient ingredient = new Ingredient(name);
+            String[] columns        = line.split(",");
+            String name             = columns[0];
+            Ingredient ingredient   = new Ingredient(name);
             this.ingredientMap.put(name, ingredient);
         }
 
