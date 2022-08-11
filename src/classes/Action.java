@@ -27,6 +27,16 @@ public class Action {
     public int getPrice() { return this.price; }
     public int getQuality() { return this.quality; }
 
+    // Is Equal
+    public Boolean isEqual(Action toCheck) {
+        if (!this.name.equals(toCheck.getName())
+        || this.price != toCheck.getPrice()
+        || this.quality != toCheck.getQuality()) {
+            return false;
+        }
+        return true;
+    }
+
     // To String
     @Override
     public String toString() {

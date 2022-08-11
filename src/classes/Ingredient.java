@@ -34,7 +34,7 @@ public class Ingredient {
         this.actions = new ArrayList<Action>();
         for (Action action : clone.getActions()) {
             Action newAction = new Action(action);
-            addAction(newAction);
+            this.actions.add(newAction);
         }
 
         // Clone ingredients
@@ -43,6 +43,11 @@ public class Ingredient {
             Ingredient newIngredient = new Ingredient(ingredient);
             this.ingredients.add(newIngredient);
         }
+    }
+
+    // Clone empty ingredient
+    public Ingredient getEmptyClone() {
+        return new Ingredient(this.name, this.price, this.quality);
     }
 
     // Member Getters
@@ -64,6 +69,38 @@ public class Ingredient {
         ingredients.add(ingredient);
         this.price += ingredient.getPrice();
         this.quality += ingredient.getQuality();
+    }
+
+    // Is Equal
+    public Boolean isEqual(Ingredient toCheck) {
+        
+        // Basic checks
+        if (!this.name.equals(toCheck.getName())
+        || this.price != toCheck.getPrice()
+        || this.quality != toCheck.getQuality()
+        || this.actions.size() != toCheck.getActions().size()
+        || this.ingredients.size() != toCheck.getIngredients().size()) {
+            return false;
+        }
+        
+        // Check actions
+        ArrayList<Action> toCheckActions = toCheck.getActions();
+        for (int i = 0; i < this.actions.size(); i++) {
+            if (!this.actions.get(i).isEqual(toCheckActions.get(i))) {
+                return false;
+            }
+        }
+        
+        // Check subingredients
+        ArrayList<Ingredient> toCheckIngredients = toCheck.getIngredients();
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            if (!this.ingredients.get(i).isEqual(toCheckIngredients.get(i))) {
+                return false;
+            }
+        }
+
+        // Passes all tests
+        return true;
     }
 
     // To String

@@ -1,6 +1,7 @@
 package factories;
 import classes.Action;
 import classes.Ingredient;
+import classes.Order;
 
 /**
  * Factory that contains other factories
@@ -13,13 +14,13 @@ public class Factory {
     // Factories
     private FactoryAction factoryAction;
     private FactoryIngredient factoryIngredient;
-    private FactoryDish factoryDish;
+    private FactoryOrder factoryOrder;
 
     // Single Constructor
     private Factory() {
         this.factoryAction = new FactoryAction();
-        this.factoryDish = new FactoryDish();
-        this.factoryIngredient = new FactoryIngredient(factoryAction);
+        this.factoryIngredient = new FactoryIngredient(this.factoryAction);
+        this.factoryOrder = new FactoryOrder(this.factoryIngredient);
     }
 
     // Passes function call to appropriate factory
@@ -27,6 +28,5 @@ public class Factory {
     public Action getNewAction(String name) { return this.factoryAction.getNewAction(name); }
     public Ingredient getIngredient(String name) { return this.factoryIngredient.getIngredient(name); }
     public Ingredient getNewIngredient(String name) { return this.factoryIngredient.getNewIngredient(name); }
-    public String getIngredientAlias(String name) { return this.factoryDish.getIngredientAlias(name); }
-    public String getIngredientName(String alias) { return this.factoryDish.getIngredientName(alias); }
+    public Order getOrder(String alias) { return this.factoryOrder.getOrder(alias); }
 }

@@ -1,5 +1,4 @@
 package factories;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,50 +23,6 @@ public class FactoryIngredient {
         } catch (IOException e) {}
     }
 
-    // Adds a raw ingredient to the recipe map
-    private void setIngredient(String name, int price, int quality, String[] actions) {
-        Ingredient ingredient = new Ingredient(name, price, quality);
-        for (int i = 0; i < actions.length; i++) {
-            if (!actions[i].equals(Constants.NONE_ACTION)) {
-                Action action = this.factoryAction.getAction(actions[i]);
-                ingredient.addAction(action);
-            }
-        }
-        this.ingredientMap.put(name, ingredient);
-    }
-
-    // Adds an ingredient assembly to the recipe map
-    private void setIngredient(String name, String[] actions, ArrayList<String> componentNames, ArrayList<String[]> componentActions) {
-        
-        // Create base ingredient
-        Ingredient ingredient = new Ingredient(name, 0, 0);
-        for (int i = 0; i < actions.length; i++) {
-            Action clone = this.factoryAction.getNewAction(actions[i]);
-            ingredient.addAction(clone);
-        }
-
-        // Add sub ingredients
-        for (int i = 0; i < componentNames.size(); i++) {
-
-            // Get ingredient
-            Ingredient newIngredient = this.ingredientMap.get(componentNames.get(i));
-            Ingredient clone = new Ingredient(newIngredient);
-            
-            // Add new actions
-            for (int j = 0; j < componentActions.get(i).length; j++) {
-                String actionName = componentActions.get(i)[j];
-                if (!actionName.equals(Constants.NONE_ACTION)) {
-                    Action action = this.factoryAction.getNewAction(actionName);
-                    clone.addAction(action);
-                }
-            }
-
-            // Add component ingredient
-            ingredient.addIngredient(clone);
-        }
-        this.ingredientMap.put(name, ingredient);
-    }
-
     // Get the recipes
     public void setIngredients() throws IOException {
 
@@ -86,20 +41,33 @@ public class FactoryIngredient {
             String name = columns[0];
             int price = Integer.parseInt(columns[1]);
             int quality = Integer.parseInt(columns[2]);
-            String[] actions = columns[3].split("&");
-            int numComponents = (columns.length - 4) / 2;
+            int numComponents = (columns.length - 3) / 2;
+            
+            // If recipe has no subingredients
+            Ingredient ingredient = new Ingredient(name, price, quality);
+            this.ingredientMap.put(name, ingredient);
+            
+            // If ingredient has subingredients
+            if (numComponents > 0) {
+                for (int i = 3; i < columns.length; i += 2) {
+                    
+                    // Get subingredient
+                    String subName = columns[i];
+                    String[] subActions = columns[i + 1].split("&");
+                    Ingredient subIngredient = this.ingredientMap.get(subName);
+                    Ingredient clone = new Ingredient(subIngredient);
 
-            // Add recipe based on number of ingredients
-            if (numComponents == 0) {
-                setIngredient(name, price, quality, actions);
-            } else {
-                ArrayList<String> componentNames = new ArrayList<String>();
-                ArrayList<String[]> componentActions = new ArrayList<String[]>();
-                for (int i = 4; i < columns.length; i += 2) {
-                    componentNames.add(columns[i]);
-                    componentActions.add(columns[i + 1].split("&"));
+                    // Add new actions
+                    for (int j = 0; j < subActions.length; j++) {
+                        if (!subActions[j].equals(Constants.NONE_ACTION)) {
+                            Action action = this.factoryAction.getNewAction(subActions[j]);
+                            clone.addAction(action);
+                        }
+                    }
+
+                    // Add subingredient
+                    ingredient.addIngredient(clone);
                 }
-                setIngredient(name, actions, componentNames, componentActions);
             }
         }
 

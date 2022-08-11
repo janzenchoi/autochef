@@ -6,8 +6,8 @@ public class Constants {
     
     // File names
     public static final String ACTION_DATA_PATH     = "./src/factories/dataAction.csv";
-    public static final String DISH_DATA_PATH       = "./src/factories/dataDish.csv";
     public static final String INGREDIENT_DATA_PATH = "./src/factories/dataIngredient.csv";
+    public static final String ORDER_DATA_PATH      = "./src/factories/dataOrder.csv";
     
     // Values
     public static final String NONE_ACTION      = "none";

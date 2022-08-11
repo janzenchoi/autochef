@@ -12,7 +12,7 @@ import java.io.IOException;
 public class FactoryAction {
     private HashMap<String, Action> actionMap;
     
-    // Singleton Constructor
+    // Constructor
     public FactoryAction() {
         try {
             this.actionMap = new HashMap<String, Action>();
