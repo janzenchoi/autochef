@@ -27,11 +27,12 @@ public class FactoryIngredient {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.INGREDIENT_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (| name |)
+        // Read row by row (| name | alias |)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns        = line.split(",");
             String name             = columns[0];
-            Ingredient ingredient   = new Ingredient(name);
+            String alias            = columns[1];
+            Ingredient ingredient   = new Ingredient(name, alias);
             this.ingredientMap.put(name, ingredient);
         }
 

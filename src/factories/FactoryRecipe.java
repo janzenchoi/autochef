@@ -34,35 +34,28 @@ public class FactoryRecipe {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.RECIPE_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (| outputName | ingredient_1 | actions_1 | ... | ingredient_N | actions_N |)
+        // Read row by row (| outputName | action | ingredient_1 | ingredient_2 | ingredient_3 |)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns = line.split(",");
+
+            // Create output ingredient
             String outputName = columns[0];
-            
-            // Create list of input ingredients
-            ArrayList<Ingredient> inputIngredients = new ArrayList<Ingredient>();
-            for (int i = 1; i < columns.length; i += 2) {
+            Ingredient output = this.factoryIngredient.getIngredient(outputName);
+
+            // Create action
+            String actionName = columns[1];
+            Action action = this.factoryAction.getAction(actionName);
+
+            // Create list of ingredients
+            ArrayList<Ingredient> inputs = new ArrayList<Ingredient>();
+            for (int i = 2; i < columns.length; i++) {
                 String inputName = columns[i];
-                String[] inputActions = columns[i + 1].split("&");
-                
-                // Create input ingredient
-                Ingredient inputIngredient = this.factoryIngredient.getIngredientCopy(inputName);
-
-                // Add actions to input ingredient
-                for (int j = 0; j < inputActions.length; j++) {
-                    if (!inputActions[j].equals(Constants.NONE_ACTION)) {
-                        Action action = this.factoryAction.getAction(inputActions[j]);
-                        inputIngredient.addAction(action);
-                    }
-                }
-
-                // Add to list
-                inputIngredients.add(inputIngredient);
+                Ingredient input = this.factoryIngredient.getIngredient(inputName);
+                inputs.add(input);
             }
 
             // Create recipe
-            Ingredient outputIngredient = this.factoryIngredient.getIngredientCopy(outputName);
-            Recipe recipe = new Recipe(inputIngredients, outputIngredient);
+            Recipe recipe = new Recipe(output, action, inputs);
             this.recipeMap.put(outputName, recipe);
         }
 

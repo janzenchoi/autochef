@@ -19,8 +19,8 @@ public class Instructor {
     }
 
     // Provides instructions on how to create a listing
-    public ArrayList<Instruction> instruct(String listingAlias) {
-        Listing listing = this.factory.getListing(listingAlias);
+    public ArrayList<Instruction> instruct(String name) {
+        Listing listing = this.factory.getListing(name);
         Ingredient ingredient = listing.getIngredient();
         ArrayList<Instruction> instructionList = getInstructions(ingredient);
         return instructionList;
@@ -33,34 +33,24 @@ public class Instructor {
         ArrayList<Instruction> instructions = new ArrayList<Instruction>();
         Recipe recipe = this.factory.getRecipe(ingredient.getName());
 
-        // If there are subingredients
-        if (recipe != null) {
+        // If the ingredient is raw, return nothing
+        if (recipe == null) {
+            return instructions;
+        }
             
-            // Get subingredients
-            ArrayList<Ingredient> subIngredients = recipe.getInputs();
-            for (Ingredient subIngredient : subIngredients) {
-                ArrayList<Instruction> subInstructions = getInstructions(subIngredient);
-                instructions.addAll(subInstructions);
-            }
-
-            // Assemble ingredients if there are multiple
-            if (subIngredients.size() > 1) {
-                Action action = this.factory.getAction(Constants.ASSEMBLE_ACTION);
-                Instruction instruction = new Instruction(action, subIngredients);
-                instructions.add(instruction);
-            }
+        // Get subingredients
+        ArrayList<Ingredient> subIngredients = recipe.getInputs();
+        for (Ingredient subIngredient : subIngredients) {
+            ArrayList<Instruction> subInstructions = getInstructions(subIngredient);
+            instructions.addAll(subInstructions);
         }
 
-        // Add instructions to deal with this ingredient
-        ArrayList<Action> actions = ingredient.getActions();
-        for (int i = 0; i < actions.size(); i++) {
-            Ingredient emptyIngredient = new Ingredient(ingredient.getName());
-            for (int j = 0; j < i; j++) {
-                emptyIngredient.addAction(actions.get(j));
-            }
-            Instruction instruction = new Instruction(actions.get(i), emptyIngredient);
-            instructions.add(instruction);
-        }
+        // Act on subingredients
+        Action action = recipe.getAction();
+        Instruction instruction = new Instruction(action, subIngredients);
+        instructions.add(instruction);
+
+        // Return instructions
         return instructions;
     }
 

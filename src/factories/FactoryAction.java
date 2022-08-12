@@ -22,16 +22,17 @@ public class FactoryAction {
 
     // Set all the Actions
     private void setActions() throws IOException {
-
+        
         // Initialisation
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.ACTION_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (| name |)
+        // Read row by row (| name | alias |)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns    = line.split(",");
             String name         = columns[0];
-            Action action       = new Action(name);
+            String alias        = columns[1];
+            Action action       = new Action(name, alias);
             this.actionMap.put(name, action);
         }
 

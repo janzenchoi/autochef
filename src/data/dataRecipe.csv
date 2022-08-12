@@ -1,0 +1,10 @@
+﻿name,action,ingredient_1,ingredient_2,ingredient_3
+bread,bake,dough,,
+burger_chicken,assemble,bread,chicken_fried,lettuce_chopped
+dough,assemble,flour,water,
+lettuce_chopped,chop,lettuce,,
+pizza,bake,pizza_raw,,
+pizza_raw,assemble,cheese,tomato_sauce,dough
+salad,assemble,lettuce_chopped,tomato_chopped,
+tomato_chopped,chop,tomato,,
+tomato_sauce,blend,tomato_chopped,,

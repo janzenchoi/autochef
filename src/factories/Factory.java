@@ -32,6 +32,6 @@ public class Factory {
     public Ingredient getIngredientCopy(String name) { return this.factoryIngredient.getIngredientCopy(name); }
     public Recipe getRecipe(String name) { return this.factoryRecipe.getRecipe(name); }
     public Recipe getRecipeCopy(String name) { return this.factoryRecipe.getRecipeCopy(name); }
-    public Listing getListing(String alias) { return this.factoryListing.getListing(alias); }
-    public Listing getListingCopy(String alias) { return this.factoryListing.getListingCopy(alias); }
+    public Listing getListing(String name) { return this.factoryListing.getListing(name); }
+    public Listing getListingCopy(String name) { return this.factoryListing.getListingCopy(name); }
 }

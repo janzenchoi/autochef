@@ -5,23 +5,28 @@ package classes;
  */
 public class Action {
     private String name;
+    private String alias;
 
     // Constructor
-    public Action(String name) {
+    public Action(String name, String alias) {
         this.name = name;
+        this.alias = alias;
     }
 
     // Clone constructor
     public Action(Action clone) {
         this.name = clone.getName();
+        this.alias = clone.getAlias();
     }
 
     // Member Getters
     public String getName() { return this.name; }
+    public String getAlias() { return this.alias; }
 
     // Is Equal
     public Boolean isEqual(Action toCheck) {
-        if (!this.name.equals(toCheck.getName())) {
+        if (!this.name.equals(toCheck.getName())
+        || !this.alias.equals(toCheck.getAlias())) {
             return false;
         }
         return true;
@@ -31,7 +36,8 @@ public class Action {
     @Override
     public String toString() {
         return "{" +
-            "name: " + this.name +
+            "name: " + this.name + ", " +
+            "alias: " + this.alias +
         "}";
     }
 }

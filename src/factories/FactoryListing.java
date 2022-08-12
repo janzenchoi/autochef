@@ -30,18 +30,17 @@ public class FactoryListing {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.LISTING_DATA_PATH));
         String line = bufferedReader.readLine();
 
-        // Read row by row (| alias | ingredientName | price | quality |)
+        // Read row by row (| ingredient | price | quality |)
         while ((line = bufferedReader.readLine()) != null) {
             String[] columns        = line.split(",");
-            String alias            = columns[0];
-            String ingredientName   = columns[1];
-            int price               = Integer.parseInt(columns[2]);
-            int quality             = Integer.parseInt(columns[3]);
+            String ingredientName   = columns[0];
+            int price               = Integer.parseInt(columns[1]);
+            int quality             = Integer.parseInt(columns[2]);
             
             // Create ingredient
             Ingredient ingredient = this.factoryIngredient.getIngredient(ingredientName);
-            Listing listing = new Listing(alias, ingredient, price, quality);
-            listingMap.put(alias, listing);
+            Listing listing = new Listing(ingredient, price, quality);
+            listingMap.put(ingredientName, listing);
         }
 
         // Close and return
@@ -49,12 +48,12 @@ public class FactoryListing {
     }
 
     // Gets a listing
-    public Listing getListing(String alias) {
-        return this.listingMap.get(alias);
+    public Listing getListing(String name) {
+        return this.listingMap.get(name);
     }
 
     // Gets a copy of a listing
-    public Listing getListingCopy(String alias) {
-        return new Listing(this.listingMap.get(alias));
+    public Listing getListingCopy(String name) {
+        return new Listing(this.listingMap.get(name));
     }
 }

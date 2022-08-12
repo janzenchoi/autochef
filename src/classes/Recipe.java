@@ -6,35 +6,40 @@ import helpers.General;
  * Stores an instruction to do something
  */
 public class Recipe {
-    public ArrayList<Ingredient> inputs;
     public Ingredient output;
+    public Action action;
+    public ArrayList<Ingredient> inputs;
 
     // Constructor
-    public Recipe(ArrayList<Ingredient> inputs, Ingredient output) {
-        this.inputs = inputs;
+    public Recipe(Ingredient output, Action action, ArrayList<Ingredient> inputs) {
         this.output = output;
+        this.action = action;
+        this.inputs = inputs;
     }
 
     // Clone Constructor
     public Recipe(Recipe clone) {
+        this.output = clone.getOutput();
+        this.action = clone.getAction();
         this.inputs = new ArrayList<Ingredient>();
         for (Ingredient ingredient : clone.getInputs()) {
             this.inputs.add(ingredient);
         }
-        this.output = clone.getOutput();
     }
 
     // Member getters
-    public ArrayList<Ingredient> getInputs() { return this.inputs; }
     public Ingredient getOutput() { return this.output; }
+    public Action getAction() { return this.action; }
+    public ArrayList<Ingredient> getInputs() { return this.inputs; }
 
     // To String
     @Override
     public String toString() {
         String inputString = General.arrayToString(this.inputs);
         return "{" +
-            "inputs: " + inputString + ", " +
-            "output: " + this.output +
+            "output: " + this.output + ", " +
+            "action: " + this.action + ", " +
+            "inputs: " + inputString +
         "}";
     }
 }
