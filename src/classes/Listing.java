@@ -1,7 +1,7 @@
 package classes;
 
 /**
- * Stores information about dish listings
+ * Stores information about listings
  */
 public class Listing {
     private Ingredient ingredient;

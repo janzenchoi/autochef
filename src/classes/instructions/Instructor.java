@@ -2,10 +2,8 @@ package classes.instructions;
 import java.util.ArrayList;
 import classes.Action;
 import classes.Ingredient;
-import classes.Listing;
 import classes.Recipe;
 import factories.Factory;
-import helpers.Constants;
 
 /**
  * To provide instructions
@@ -20,8 +18,7 @@ public class Instructor {
 
     // Provides instructions on how to create a listing
     public ArrayList<Instruction> instruct(String name) {
-        Listing listing = this.factory.getListing(name);
-        Ingredient ingredient = listing.getIngredient();
+        Ingredient ingredient = this.factory.getIngredient(name);
         ArrayList<Instruction> instructionList = getInstructions(ingredient);
         return instructionList;
     }
