@@ -1,0 +1,11 @@
+﻿name,alias,priceMultiplier,qualityMultiplier,ingredient_1,ingredient_2,ingredient_3
+bread_sack,Bread Sack,0,-10,bread,,
+cheese_wheel,Cheese Wheel,0,0,cheese,,
+chicken_fridge,Chicken Fridge,0,0,chicken,,
+flour_bag,Flour Bag,0,0,flour,,
+lettuce_crate,Lettuce Crate,0,0,lettuce,,
+pizza_fridge,Pizza Fridge,0,-10,pizza_raw,,
+sauce_dispenser,Sauce Dispenser,0,0,tomato_sauce,,
+tomato_crate,Tomato Crate,0,0,tomato,,
+vegetable_crate,Vegetable Crate,0,0,lettuce,tomato,
+water_tap,Water Tap,0,0,water,,

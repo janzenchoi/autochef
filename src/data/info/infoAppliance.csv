@@ -1,0 +1,9 @@
+﻿name,alias,priceMultiplier,qualityMultiplier,remote,capacity,time,action_1,action_2,action_3
+blender,Blender,0,0,TRUE,1,3000,blend,,
+boiler,Boiler,0,0,TRUE,1,4000,boil,,
+counter,Counter,0,0,FALSE,1,2000,assemble,,
+chopping_board,Chopping Board,0,0,FALSE,1,1000,chop,,
+frier,Frier,0,0,TRUE,2,3000,fry,,
+griller,Griller,0,0,TRUE,2,4000,grill,,
+oven,Oven,0,0,TRUE,2,5000,bake,,
+serve_station,Serve Station,0,0,FALSE,1,0,serve,,
